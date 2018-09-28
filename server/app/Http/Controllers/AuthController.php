@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Auth\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +17,13 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['signup']]);
+        $this->middleware('auth:api', ['except' => ['signup','fnGetUsers']]);
     }
-
-   
-
+    public function fnGetUsers(){
+        $users = \DB::select("SELECT id,name FROM users");
+        return $users;
+    }
+  
     public function signup(SignUpRequest $request)
     {
         User::create($request->all());
