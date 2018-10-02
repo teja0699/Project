@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EntriesService } from '../../services/entries.service';
+
+
 @Component({
-  selector: 'app-signup',
+  selector: 'app-entries',
   templateUrl: './entries.component.html',
   styleUrls: ['./entries.component.css']
 })
+
 export class EntriesComponent implements OnInit {
     usersList: any;
     data:any;
@@ -18,7 +21,6 @@ export class EntriesComponent implements OnInit {
   public success = '';
 
   constructor(private entry: EntriesService, private router: Router) {
-      this.getUsersList();
   }
 
   onSubmit() {
@@ -31,19 +33,23 @@ export class EntriesComponent implements OnInit {
   
     handleResponse(response) {
         this.success = response.data;
-        this.router.navigateByUrl('/signup');
+        this.router.navigateByUrl('/showentries');
       }
   handleError(error) {
     this.error = error.error.errors;
   }
-
   ngOnInit() {
-  }
-    getUsersList()
-    {
-       this.usersList = this.entry.getUsers();
-       console.log(this.usersList);
-    }
+      this.entry.getUsers().subscribe(
+          (data) => {
+              this.usersList = data;
+          },
+          (error) => {
+              console.log(error);
+
+          }
+      );
+      console.log(this.usersList);
+      }
 
 
 }

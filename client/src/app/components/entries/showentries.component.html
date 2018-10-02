@@ -3,7 +3,7 @@
         <div class="card-header">List Entries</div>
 <div>
     <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-theme-balham"
-                     [gridOptions]="gridOptions">
+                     [rowData]="entriesList" [columnDefs]="columns" enableFilter="true" enableSorting="true">
     </ag-grid-angular>
 </div>
     </div></div>

@@ -9,8 +9,8 @@
           <div class="col-sm-8 col-md-4">
             <select required id="Id" #Id="ngModel" class="hideLabel form-control" [(ngModel)]="form.user_id" name="Id" (change)="selectName();">
               <option selected="" value=""></option>
-              <option [ngValue]="k.Id" *ngFor="let k of usersList">
-                {{k.Name}}
+              <option [ngValue]="k.id" *ngFor="let k of usersList">
+                {{k.name}}
               </option>
             </select>
             <div class="alert alert-danger" [hidden]="!error.user_id">
